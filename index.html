@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>謝瑜 | 履歷 Resume</title>
+    <style>
+        :root {
+            --page-bg: #D9DCD6;      /* 最淺色：大背景 */
+            --primary-bg: #ffffff;   /* 履歷主體背景：保持白色以確保閱讀性 */
+            --sidebar-bg: #0D2C54;   /* 深藍色：側邊欄背景與主標題 */
+            --accent-color: #00A6ED; /* 亮藍色：點綴色、箭頭、重點線條 */
+            --text-main: #3E2B07;    /* 深棕色：主要內文文字 */
+            --text-light: #A9927D;   /* 淺棕色：日期與次要文字 */
+            --border-color: #D9DCD6; /* 邊框顏色 */
+            --spacing: 30px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .resume-page {
+            background: var(--primary-bg);
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            color: #fff;
+            width: 320px;
+            padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 大頭照設計 */
+        .profile-photo-container {
+            display: flex;
+            justify-content: center; /* 大頭照置中 */
+            margin-bottom: 25px;
+        }
+
+        .profile-photo {
+            width: 140px; /* 大頭照寬度 */
+            height: 140px;
+            border-radius: 50%; /* 圓形 */
+            border: 4px solid #ffffff; /* 精緻白色邊框 */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* 增加立體感 */
+            object-fit: cover; /* 確保圖片不變形，自動填充圓形區域 */
+        }
+
+        .profile-header {
+            text-align: center; /* 姓名與職稱置中於大頭照下方 */
+            width: 100%;
+        }
+
+        .sidebar h1 {
+            font-size: 2.4rem;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .sidebar .role {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .sidebar-section {
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .sidebar-section h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-align: left; /* 區塊標題靠左 */
+        }
+
+        .contact-item {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+            text-align: left; /* 聯絡資訊靠左 */
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 2px;
+            color: #D9DCD6; /* Use light color for labels */
+        }
+
+        .contact-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .skill-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .skill-group h3 {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .skill-list {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            flex: 1;
+            padding: 50px 50px;
+            min-width: 500px;
+            background: #fff;
+        }
+
+        section {
+            margin-bottom: 45px;
+        }
+
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--sidebar-bg);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Collapsible Entry Styling */
+        .entry {
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .entry:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-color: var(--text-light);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            background-color: #fafafa;
+            transition: background-color 0.3s;
+        }
+
+        .entry-header:hover {
+            background-color: #f1f3f5;
+        }
+
+        .entry-title-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .entry-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--sidebar-bg);
+        }
+
+        .entry-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-family: monospace;
+            margin-top: 4px;
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .entry.active .toggle-icon {
+            transform: rotate(90deg); /* 展開時箭頭轉向下方 */
+        }
+
+        .entry-content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+            background-color: #fff;
+            padding: 0 20px;
+        }
+
+        .entry.active .entry-content-wrapper {
+            max-height: 1000px;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .entry-content {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .entry-content li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .entry-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Standard text blocks */
+        .about-box {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-main);
+            text-align: justify;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .motivation-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            padding: 0 10px;
+        }
+
+        .motivation-text h3 {
+            font-size: 1rem;
+            margin: 20px 0 10px;
+            color: var(--sidebar-bg);
+        }
+
+        .availability-badge {
+            display: inline-block;
+            background: rgba(0, 166, 237, 0.1); /* Light accent background */
+            color: var(--sidebar-bg);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        @media (max-width: 850px) {
+            .resume-page {
+                flex-direction: column;
+            }
+            .sidebar, .main-content {
+                width: 100%;
+                min-width: unset;
+            }
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .toggle-icon {
+                align-self: flex-end;
+                margin-top: -25px;
+            }
+            .profile-photo {
+                width: 120px; /* 手機版縮小圖片 */
+                height: 120px;
+            }
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .resume-page { box-shadow: none; width: 100%; border: none; }
+            .entry-content-wrapper { max-height: none !important; padding: 20px !important; border-top: none; }
+            .toggle-icon { display: none; }
+            .entry { border: none; margin-bottom: 20px; }
+            .entry-header { padding: 0; background: none; }
+            .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .profile-photo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-page">
+    <aside class="sidebar">
+        <!-- 大頭照區塊 -->
+        <div class="profile-photo-container">
+             <img src="yu.jpg" alt="謝瑜 Profile Photo" class="profile-photo">
+        </div>
+
+        <div class="profile-header">
+            <h1>謝瑜</h1>
+            <div class="role">面試職位：行銷助理實習生 MOI | 台灣微軟未來生涯體驗計劃</div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>聯絡資訊</h2>
+            <div class="contact-item"><strong>Email</strong> yhsieh.christine@gmail.com</div>
+            <div class="contact-item"><strong>手機</strong> 0986-566-747</div>
+            <div class="contact-item"><strong>學歷</strong> 政治大學地政學系 大三</div>
+            <div class="contact-item"><strong>作品集</strong> <a href="#">issue github 剪片作品</a></div>
+            <div class="contact-item"><strong>語言能力</strong> 中文(母語)、英文B2 (<a href="https://cert.efset.org/en/s48EQA" target="_blank" style="color: #00A6ED; text-decoration: none; font-weight: bold;">Reading: C2, Writing: B2, Listening: B1, Speaking: B1</a>)</div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>專業技能</h2>
+            <div class="skill-group">
+                <h3>設計工具</h3>
+                <div class="skill-list">Canva, Adobe Photoshop、Adobe Illustrator、 Inkscape、 Microsoft PowerPoint、醒圖</div>
+            </div>
+            <div class="skill-group">
+                <h3>影片剪輯</h3>
+                <div class="skill-list">CapCut、剪映、Adobe Premiere (基礎)</div>
+            </div>
+            <div class="skill-group">
+                <h3>社群行銷</h3>
+                <div class="skill-list">Instagram 經營、文章撰寫、文案撰寫、品牌視覺規劃</div>
+            </div>
+            <div class="skill-group">
+                <h3>數據分析</h3>
+                <div class="skill-list">Microsoft Excel、Google Analytics(基礎)</div>
+            </div>
+            <div class="skill-group">
+                <h3>AI 工具</h3>
+                <div class="skill-list">Midjourney、Stable Diffusion</div>
+            </div>
+            <div class="skill-group">
+                <h3>其他軟體</h3>
+                <div class="skill-list">autoCAD、Sketchup、Shapr3D</div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>教育背景</h2>
+            <div class="contact-item">
+                <strong>國立政治大學 | 地政學系</strong>
+                預計 2027/06 畢業
+            </div>
+            <div class="contact-item" style="opacity: 0.8; font-size: 0.8rem;">
+                經歷：中原大學建築系 → 國立臺北大學不動產與城鄉系 → 國立政治大學
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <section>
+            <div class="section-header">關於我</div>
+            <div class="about-box">
+                <strong>視覺美感 × 社群創作 × 跨域溝通</strong><br><br>
+                我是一位在多元環境中持續探索的創作者。從設計美宣到品牌文案，從空間感知到短影音經營，每一段歷程都在強化我對「如何精準傳遞內容」的敏銳度。我相信好的行銷不只是追求視覺的美，更是能引發共鳴、打動人心的故事。我期望透過微軟 MOI 實習，發揮跨域溝通的優勢，將創意轉化為具實質影響力的行銷策略，並在推廣 Copilot、Azure 等最新科技尖端產品中實踐成長型思維。
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">實習 & 工作經驗</div>
+            
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">文案美編實習生 | 運動女孩</span>
+                        <span class="entry-date">2020/4 - 2020/7</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>視覺產製與品牌管理：主導品牌社群視覺策略，獨立負責素材攝影、圖文設計 (Photoshop / Canva) 與文案撰寫，產出逾 30 份行銷與社群素材，確保品牌視覺風格一致。</li>
+                        <li>數據驅動優化：具備數據敏感度，定期監測 Google Analytics (GA) 與社群後台，與主管協作分析成效並執行 SEO 關鍵字優化，帶動網站流量（自然搜尋瀏覽量）提升 3%。</li>
+                        <li>跨部門溝通與專案執行：擔任行銷與設計的溝通窗口，展現優秀的協調能力，確保專案需求準確對接並如期上線，維持高標準的社群互動率。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">建築設計實習生 | 吳宗憲建築師事務所</span>
+                        <span class="entry-date">2019/9 - 2020/2</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>品牌識別與 Logo 設計：負責事務所官方 Logo 視覺設計，精準梳理並轉譯企業核心理念，產出具高識別度的品牌標誌，建立專業且一致的對外企業形象。</li>
+                        <li>公關對外窗口與媒體溝通：擔任事務所聯繫窗口，負責與雜誌社、電視台等媒體端進行公關維護。具備獨立處理外部需求的能力，確保品牌形象與專案內容在各大平台精準曝光。</li>
+                        <li>作品集統整與系統化管理：主導專案作品集的彙整與編排，將繁雜的設計圖稿、施工照片與技術文件進行系統化分類。透過邏輯清晰的架構呈現專案精華，大幅提升向客戶提案時的說服力。</li>
+                        <li>視覺化提案與高階簡報製作：將生硬的建築概念轉化為高質感的視覺簡報，善於運用圖表優化資訊呈現，協助主持建築師進行專案競圖，確保設計核心理念能被精確傳達。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">社團 & 校園經歷</div>
+
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">美宣長 | 中原大學期初成果展</span>
+                        <span class="entry-date">109學年</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>跨組溝通與需求整合：擔任美宣組與其他部門核心溝通橋樑，快速將抽象想法轉化為具體設計規格。</li>
+                        <li>專案排程與團隊領導：帶領 5 人團隊，負責拆解任務與規劃排程，確保團隊 100% 準時交件。</li>
+                        <li>主視覺定調與實體發包：統籌完整視覺包裝，親自負責與印刷廠溝通材質、比價與發包。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">美宣幹部 | 政大轉學生聯誼會</span>
+                        <span class="entry-date">114學年</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>品牌識別建立與社群視覺定調：主導轉聯會視覺形象，獨立設計官方 Logo 與全套社群圖文模版。</li>
+                        <li>大型專案排版與實體印刷產製：負責大型活動實體「節目冊」編排設計，控管實體輸出實戰能力。</li>
+                        <li>跨組溝通對焦與數位內容策劃：將繁雜活動資訊轉化為易讀社群素材，透過吸睛圖文帶動報名率。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">其他校園經歷與專案</span>
+                        <span class="entry-date">公關、策展與領導經驗</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li><strong>跨校資源串聯與溝通</strong>：高中擔任六校聯合成果展公關窗口，協調多方利害關係人需求，確保專案順利推進。
+                        </li>
+                        <li><strong>商家開發與贊助洽談</strong>：擔任公關長帶領組員主動開發超過 50 家在地商家，撰寫企劃書並成功爭取活動經費與物資。</li>
+                        <li><strong>個人視覺展覽策劃與導覽</strong>：獨立舉辦小型個人視覺創作展覽，透過第一線互動傳遞創作核心。</li>
+                        <li><strong>模聯秘書長 | 中原大學期初成果展 (112學年)</strong>：從零到一建立社團制度，主導招生策略，成功爭取校級場地與經費。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">內容創作 & 自媒體經營</div>
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">咖啡廳主題帳號創作者 | 個人 Instagram</span>
+                        <span class="entry-date">2024至今</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>自主經營社群帳號，曾透過引發共鳴內容在 <strong>Threads 創下單篇突破 30 萬次觸及</strong>。</li>
+                        <li>獨立負責攝影與短影音剪輯，運用富士相機底片模擬調色，建立獨特「空間與光影」視覺風格。</li>
+                        <li>根據平台特性測試不同經營模式（IG 質感、Threads 互動、小紅書攻略），學會靈活變換產製模式。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">額外進修課程</div>
+            
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">好色計設計營</span>
+                        <span class="entry-date">2019年</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>跨界溝通與視覺定調：凝聚 4 位背景不同成員共識，確立視覺風格並產出主視覺海報。</li>
+                        <li>商業落地與商品開發：運用 PS/AI 進行排版設計，開發並量產出原創設計杯套。</li>
+                        <li>提案表達與市場驗證：向業界評審進行最終提案，商品最終售出 50 份。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header" onclick="this.parentElement.classList.toggle('active')">
+                    <div class="entry-title-wrap">
+                        <span class="entry-title">Inkscape 向量設計課程</span>
+                        <span class="entry-date">2026年</span>
+                    </div>
+                    <span class="toggle-icon">▶</span>
+                </div>
+                <div class="entry-content-wrapper">
+                    <ul class="entry-content">
+                        <li>AI 生成與 GUI 敏捷產製：整合 Gamma、Napkin 等 AI 內容生成工具與視覺軟體實現創意快速落地。</li>
+                        <li>動態影音與運鏡動畫設計：結合 Prezi、Sozi 非線性簡報邏輯與影片章節規劃，強化多媒體敘事。</li>
+                        <li>開源資產重組與跨平台整合：熟練運用 Inkscape 拆解重組 SVG 向量素材，展現高效資源整合力。</li>
+                        <li>實務專案協作：於小組專案中評估向量繪圖與 AI 工具效率差異，並錄製結構化教學影片。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">加入微軟的動機與自我期許</div>
+            <div class="motivation-text">
+                <h3>【加入微軟的動機】</h3>
+                我希望在微軟 MOI 的舞台上，將多年累積的視覺設計力與社群經營經驗，轉化為具有商業影響力的行銷成果。微軟推動 AI 整合 (Copilot) 與雲端普及 (Azure) 的願景，與我對「科技如何改變內容創作」的好奇心高度契合。我相信「成長型思維 (Growth Mindset)」從來不是口號，而是我過去在各種多元環境中不斷探索的真實體現。
+                
+                <h3>【自我期許與目標】</h3>
+                我期許自己能在三個實務面向獲得成長：一是「商業敏銳度」，學會以市場與數據為導向檢視企劃；二是「跨域協作力」，扮演順暢溝通的橋樑；三是「科技應用力」，實戰驗證如何運用 AI 工具優化日常營運。
+            </div>
+            <div class="availability-badge">
+                每週可配合：2-3 天 | 最快上班日期：2026/7/1
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>
